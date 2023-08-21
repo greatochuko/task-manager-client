@@ -1,11 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Task({ task, setTaskObj, setTaskList }) {
+function Task({
+  task,
+  setTaskObj,
+  setTaskList,
+  setTaskDetailsIsOpen,
+  setIsEdit,
+}) {
   const [deleteId, setDeleteId] = useState(null);
 
   function handleTaskId() {
     setTaskObj(task);
+    setIsEdit(false);
+    setTaskDetailsIsOpen(true);
   }
 
   useEffect(() => {

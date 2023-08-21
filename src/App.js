@@ -15,6 +15,7 @@ function App() {
         taskList={taskList}
         setTaskList={setTaskList}
         setTaskDetailsIsOpen={setTaskDetailsIsOpen}
+        setIsEdit={setIsEdit}
       />
       {taskDetailsIsOpen ? (
         <TaskDetails

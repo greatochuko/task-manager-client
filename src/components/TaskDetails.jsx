@@ -6,6 +6,12 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
   const [task, setTask] = useState("");
 
   useEffect(() => {
+    if (taskObj) {
+      setTask(taskObj.item);
+    }
+  }, [taskObj]);
+
+  useEffect(() => {
     async function createTask() {
       try {
         await axios.post(
@@ -50,6 +56,8 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
           onChange={(e) => setTask(e.target.value)}
           placeholder="Title"
           required
+          disabled={!isEdit}
+          autoComplete="off"
         />
         {taskObj && (
           <input type="text" name="id" value={taskObj._id} disabled />
@@ -61,6 +69,7 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
           cols="30"
           rows="10"
           placeholder="Description"
+          disabled={!isEdit}
         ></textarea>
         <div className="category">
           <label>Category</label>

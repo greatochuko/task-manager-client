@@ -28,7 +28,7 @@ button {
 }
 
 .task-list {
-    flex: 1.5;
+    flex: 2;
     padding: 0 1rem;
     overflow-y: scroll;
 }
@@ -177,7 +177,7 @@ button {
     font-size: .9rem;
 }
 
-.task-details input:disabled {
+.task-details :is(input:disabled, textarea:disabled) {
     background-color: #eee;
     /* cursor: auto; */
 }
