@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import Task from "./Task";
+import axios from "axios";
 
-export default function TaskList({ setTaskId, taskList, setTaskList }) {
+export default function TaskList({ setTaskObj, taskList, setTaskList }) {
   useEffect(() => {
-    async function getTaskList() {
-      const url = "http://127.0.0.1:5000/task";
-      const res = await fetch(url);
-      const data = await res.json();
-      setTaskList(data);
+    async function getMovie() {
+      const res = await axios.get("http://localhost:5000/task");
+      setTaskList(res.data);
     }
-    getTaskList();
-    console.log("FEtch");
+    getMovie();
   }, [setTaskList]);
+
   return (
     <div className="task-list">
       <header>
@@ -21,7 +20,14 @@ export default function TaskList({ setTaskId, taskList, setTaskList }) {
         </button>
       </header>
       {taskList.map((task) => {
-        return <Task key={task._id} task={task} setTaskId={setTaskId} />;
+        return (
+          <Task
+            key={task._id}
+            task={task}
+            setTaskObj={setTaskObj}
+            setTaskList={setTaskList}
+          />
+        );
       })}
     </div>
   );

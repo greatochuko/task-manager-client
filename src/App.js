@@ -1,19 +1,31 @@
 import { useState } from "react";
-import { Menu, TaskList, TaskDetails } from "./components";
+import { Menu, TaskList, TaskDetails, CreateNewView } from "./components";
 
 function App() {
-  const [taskId, setTaskId] = useState();
+  const [taskObj, setTaskObj] = useState(null);
   const [taskList, setTaskList] = useState([]);
+  const [isEdit, setIsEdit] = useState(true);
+  const [taskDetailsIsOpen, setTaskDetailsIsOpen] = useState(false);
 
   return (
     <div className="App">
       <Menu />
       <TaskList
-        setTaskId={setTaskId}
+        setTaskObj={setTaskObj}
         taskList={taskList}
         setTaskList={setTaskList}
+        setTaskDetailsIsOpen={setTaskDetailsIsOpen}
       />
-      <TaskDetails taskId={taskId} setTaskList={setTaskList} />
+      {taskDetailsIsOpen ? (
+        <TaskDetails
+          taskObj={taskObj}
+          setTaskList={setTaskList}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+        />
+      ) : (
+        <CreateNewView setTaskDetailsIsOpen={setTaskDetailsIsOpen} />
+      )}
     </div>
   );
 }

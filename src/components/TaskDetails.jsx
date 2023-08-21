@@ -1,21 +1,41 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function TaskDetails({ setTaskList }) {
-  const [newTodo, setNewTodo] = useState({});
+function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
+  const [newTodo, setNewTodo] = useState(null);
   const [task, setTask] = useState("");
-  const [isCreated, setIsCreated] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsCreated(false);
-    }, 3000);
-  }, []);
+    async function createTask() {
+      try {
+        await axios.post(
+          "http://localhost:5000/task",
+          {
+            ...newTodo,
+            isDone: false,
+          },
+          { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+        );
+        const getRes = await axios.get("http://127.0.0.1:5000/task");
+        setTaskList(getRes.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (newTodo !== null) {
+      createTask();
+    }
+  }, [newTodo, setTaskList]);
 
-  function handleCreateTask(e) {
+  async function handleCreateTask(e) {
     e.preventDefault();
     setNewTodo({ task: task });
-    setIsCreated(true);
+    setTask("");
+  }
+
+  function handleEdit(e) {
+    e.preventDefault();
+    setIsEdit(true);
   }
 
   return (
@@ -29,7 +49,11 @@ function TaskDetails({ setTaskList }) {
           value={task}
           onChange={(e) => setTask(e.target.value)}
           placeholder="Title"
+          required
         />
+        {taskObj && (
+          <input type="text" name="id" value={taskObj._id} disabled />
+        )}
         {/* <label>Description</label> */}
         <textarea
           name="description"
@@ -47,44 +71,17 @@ function TaskDetails({ setTaskList }) {
         </div>
         <div className="buttons">
           <button className="delete-btn">Delete Task</button>
-          <button className="save-btn" type="submit">
-            Save Changes
-          </button>
+          {isEdit ? (
+            <button className="save-btn" type="submit">
+              Save Changes
+            </button>
+          ) : (
+            <button className="edit-btn" onClick={handleEdit}>
+              Edit
+            </button>
+          )}
         </div>
       </form>
-      {isCreated && (
-        <TaskCreatedView newTodo={newTodo} setTaskList={setTaskList} />
-      )}
-    </div>
-  );
-}
-
-function TaskCreatedView({ newTodo, setTaskList }) {
-  useEffect(() => {
-    async function createTask() {
-      try {
-        const res = await axios.post(
-          "http://localhost:5000/task",
-          {
-            ...newTodo,
-            isDone: false,
-          },
-          { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
-        );
-        console.log(res.data);
-        const getRes = await axios.get("http://127.0.0.1:5000/task");
-        setTaskList(getRes.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    console.log("New Todo: ", newTodo);
-
-    createTask();
-  }, [newTodo, setTaskList]);
-  return (
-    <div className="task-created">
-      <h1>Task Created Successfully!</h1>
     </div>
   );
 }
