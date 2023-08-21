@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "open sans";
+    color: #444;
+    background-color: var(--white);
+}
+
+:root {
+    --add-btn-bg: hsl(205, 100%, 50%);
+    --add-btn-bg-hover: hsl(200, 100%, 50%);
+    --white: rgb(250, 250, 250);
+}
+
+button {
+    cursor: pointer;
+}
+
+.App {
+    display: flex;
+    padding: 1rem;
+    height: 100vh;
+}
+
+.task-list {
+    flex: 1.5;
+    padding: 0 1rem;
+}
+
+.menu,
+.task-details {
+    background-color: #f2f2f2;
+    flex: 1;
+    border-radius: 10px;
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    flex: .7;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-list header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.add-task-btn {
+    background-color: var(--add-btn-bg);
+    border: none;
+    width: 2.5rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: rgb(250, 250, 250);
+    border-radius: 5px;
+}
+
+.add-task-btn:hover {
+    background-color: var(--add-btn-bg-hover);
+}
+
+.task {
+    display: flex;
+    padding: .8rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.task:hover {
+    background-color: #f2f2f2;
+}
+
+.task input {
+    margin-right: 1rem;
+}
+
+.task p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    font-weight: 500;
+}
+
+.task p span {
+    display: none;
+    padding: 0 10px;
+}
+
+.task p span:hover {
+    color: rgb(255, 100, 100);
+}
+
+.task:hover p span {
+    display: block;
+}
+
+/* TASK DETAILS */
+
+.task-details h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.task-details form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* .task-details form label {
+    margin: 1rem 0 .5rem;
+    font-weight: 500;
+} */
+
+.task-details form :is(input, textarea) {
+    background-color: rgb(250, 250, 250);
+    outline: none;
+    border: solid 1px #ddd;
+    padding: .7rem;
+    border-radius: 5px;
+    resize: none;
+    font-family: inherit;
+    margin: .5rem 0;
+    font-size: .9rem;
+}
+
+.task-details .buttons {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.task-details .buttons button {
+    padding: .7rem 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: .15s;
+}
+
+.task-details .buttons button.delete-btn {
+    color: rgb(255, 100, 100);
+    border: solid 1px rgb(255, 100, 100);
+}
+
+.task-details .buttons button.delete-btn:hover {
+    background-color: rgb(255, 100, 100);
+    color: rgb(250, 250, 250);
+}
+
+.task-details .buttons button.save-btn {
+    background-color: rgb(72, 160, 72);
+    color: rgb(250, 250, 250);
+    border: solid 1px rgb(72, 160, 72);
+}
+
+.task-details .buttons button.save-btn:hover {
+    color: rgb(72, 160, 72);
+    background-color: rgb(250, 250, 250);
+}
+
+.task-created {
+    background-color: green;
+    color: var(--white);
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    width: 70%;
+    height: 4rem;
+}
