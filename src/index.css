@@ -177,6 +177,10 @@ button {
     font-size: .9rem;
 }
 
+.task-details form textarea {
+    height: 10rem;
+}
+
 .task-details :is(input:disabled, textarea:disabled) {
     background-color: #eee;
     /* cursor: auto; */
@@ -210,6 +214,10 @@ button {
     background-color: rgb(72, 160, 72);
     color: rgb(250, 250, 250);
     border: solid 1px rgb(72, 160, 72);
+}
+
+.create-view .save-btn {
+    width: 100%;
 }
 
 .task-details .buttons button.save-btn:hover {

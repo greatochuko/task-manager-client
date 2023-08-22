@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
+function CreateView({ setTaskList, taskObj }) {
   const [newTodo, setNewTodo] = useState(null);
   const [task, setTask] = useState("");
 
@@ -39,13 +39,8 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
     setTask("");
   }
 
-  function handleEdit(e) {
-    e.preventDefault();
-    setIsEdit(true);
-  }
-
   return (
-    <div className="task-details">
+    <div className="task-details create-view">
       <h2>Task:</h2>
       <form action="#" method="post" onSubmit={handleCreateTask}>
         {/* <label>Title</label> */}
@@ -56,8 +51,7 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
           onChange={(e) => setTask(e.target.value)}
           placeholder="Title"
           required
-          disabled={!isEdit}
-          autoComplete="off"
+          autoComplete="on"
         />
         {taskObj && (
           <input type="text" name="id" value={taskObj._id} disabled />
@@ -69,7 +63,6 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
           cols="30"
           rows="10"
           placeholder="Description"
-          disabled={!isEdit}
         ></textarea>
         <div className="category">
           <label>Category</label>
@@ -79,20 +72,13 @@ function TaskDetails({ setTaskList, taskObj, isEdit, setIsEdit }) {
           </select>
         </div>
         <div className="buttons">
-          <button className="delete-btn">Delete Task</button>
-          {isEdit ? (
-            <button className="save-btn" type="submit">
-              Save Changes
-            </button>
-          ) : (
-            <button className="edit-btn" onClick={handleEdit}>
-              Edit
-            </button>
-          )}
+          <button className="save-btn" type="submit">
+            Create
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
-export default TaskDetails;
+export default CreateView;

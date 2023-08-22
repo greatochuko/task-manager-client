@@ -12,7 +12,7 @@ function Task({
 
   function handleTaskId() {
     setTaskObj(task);
-    setIsEdit(false);
+    setIsEdit(true);
     setTaskDetailsIsOpen(true);
   }
 

@@ -20,7 +20,7 @@ export default function TaskList({
   function openCreateTaskView() {
     setTaskDetailsIsOpen(true);
     setTaskObj(null);
-    setIsEdit(true);
+    setIsEdit(false);
   }
 
   return (
