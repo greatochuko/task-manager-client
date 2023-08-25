@@ -40,7 +40,7 @@ function App() {
           setIsEdit={setIsEdit}
         />
       )}
-    </div>
+    </div> 
   );
 }
 

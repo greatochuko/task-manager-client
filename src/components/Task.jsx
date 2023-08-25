@@ -22,6 +22,8 @@ function Task({
         await axios.delete(`http://localhost:5000/task/${deleteId}`);
         const getRes = await axios.get("http://127.0.0.1:5000/task");
         setTaskList(getRes.data);
+        setTaskDetailsIsOpen(false);
+        setTaskObj(null);
       } catch (err) {
         console.error(err);
       }
@@ -29,7 +31,7 @@ function Task({
     if (deleteId) {
       deleteTask();
     }
-  }, [deleteId, setTaskList]);
+  }, [deleteId, setTaskList, setTaskDetailsIsOpen, setTaskObj]);
 
   async function handleDelete(e) {
     e.stopPropagation();
